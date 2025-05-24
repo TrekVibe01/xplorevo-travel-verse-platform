@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Building, Car, Users, Calendar, MapPin, TrendingUp, Star, DollarSign } from "lucide-react";
+import { Building, Car, Users, Calendar, MapPin, TrendingUp, Star, DollarSign, Shield } from "lucide-react";
 
 const PartnerDashboards = () => {
   return (
