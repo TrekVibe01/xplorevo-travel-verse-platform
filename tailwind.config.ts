@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -122,75 +123,6 @@ export default {
 					'50%': {
 						opacity: '.5'
 					}
-				},
-				'bounce-in': {
-					'0%': {
-						transform: 'scale(0.3)',
-						opacity: '0'
-					},
-					'50%': {
-						transform: 'scale(1.05)'
-					},
-					'70%': {
-						transform: 'scale(0.9)'
-					},
-					'100%': {
-						transform: 'scale(1)',
-						opacity: '1'
-					}
-				},
-				'slide-in-left': {
-					'0%': {
-						transform: 'translateX(-100%)',
-						opacity: '0'
-					},
-					'100%': {
-						transform: 'translateX(0)',
-						opacity: '1'
-					}
-				},
-				'slide-in-right': {
-					'0%': {
-						transform: 'translateX(100%)',
-						opacity: '0'
-					},
-					'100%': {
-						transform: 'translateX(0)',
-						opacity: '1'
-					}
-				},
-				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0px)'
-					},
-					'50%': {
-						transform: 'translateY(-10px)'
-					}
-				},
-				'wiggle': {
-					'0%, 100%': {
-						transform: 'rotate(-3deg)'
-					},
-					'50%': {
-						transform: 'rotate(3deg)'
-					}
-				},
-				'heart-beat': {
-					'0%': {
-						transform: 'scale(1)'
-					},
-					'14%': {
-						transform: 'scale(1.3)'
-					},
-					'28%': {
-						transform: 'scale(1)'
-					},
-					'42%': {
-						transform: 'scale(1.3)'
-					},
-					'70%': {
-						transform: 'scale(1)'
-					}
 				}
 			},
 			animation: {
@@ -199,13 +131,7 @@ export default {
 				'fade-in': 'fade-in 0.6s ease-out',
 				'slide-up': 'slide-up 0.8s ease-out',
 				'scale-in': 'scale-in 0.5s ease-out',
-				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-				'bounce-in': 'bounce-in 0.6s ease-out',
-				'slide-in-left': 'slide-in-left 0.6s ease-out',
-				'slide-in-right': 'slide-in-right 0.6s ease-out',
-				'float': 'float 3s ease-in-out infinite',
-				'wiggle': 'wiggle 1s ease-in-out infinite',
-				'heart-beat': 'heart-beat 1s ease-in-out infinite'
+				'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -213,9 +139,6 @@ export default {
 			},
 			fontFamily: {
 				'sans': ['Inter', 'system-ui', 'sans-serif'],
-			},
-			screens: {
-				'xs': '475px',
 			}
 		}
 	},
