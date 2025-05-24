@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Hero from "@/components/Hero";
 import Navigation from "@/components/Navigation";
@@ -15,10 +14,6 @@ const Index = () => {
       <Navigation />
       <Hero />
       <Features />
-      <TravelReels />
-      <Leaderboard />
-      <EmergencySupport />
-      <PartnerDashboards />
       <Footer />
     </div>
   );

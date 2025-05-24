@@ -8,14 +8,46 @@ import {
   Calendar, 
   Users,
   Menu,
-  X
+  X,
+  ChevronDown,
+  Building,
+  Car,
+  Shield
 } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const tourCategories = [
+    { name: "Himalayan Treks", link: "/tours?category=himalayan" },
+    { name: "Beach Destinations", link: "/tours?category=beach" },
+    { name: "Desert Safari", link: "/tours?category=desert" },
+    { name: "Wildlife Tours", link: "/tours?category=wildlife" }
+  ];
+
+  const rentalCategories = [
+    { name: "Bikes & Motorcycles", link: "/rentals?category=bikes" },
+    { name: "Cars & SUVs", link: "/rentals?category=cars" },
+    { name: "Camping Gear", link: "/rentals?category=camping" },
+    { name: "Adventure Equipment", link: "/rentals?category=adventure" }
+  ];
+
+  const communityCategories = [
+    { name: "Local Communities", link: "/community?type=local" },
+    { name: "Travel Groups", link: "/community?type=groups" },
+    { name: "Solo Travelers", link: "/community?type=solo" },
+    { name: "Photography Clubs", link: "/community?type=photography" }
+  ];
+
   return (
-    <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-red-100 z-50 shadow-sm">
+    <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md border-b border-red-100 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -30,21 +62,107 @@ const Navigation = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/tours" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
-              Tours & Treks
-            </a>
-            <a href="/rentals" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
-              Rentals
-            </a>
-            <a href="#reels" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
-              Travel Reels
-            </a>
-            <a href="#community" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
-              Community
-            </a>
-            <a href="/dashboard" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
-              Dashboard
-            </a>
+            <NavigationMenu>
+              <NavigationMenuList className="gap-6">
+                {/* Tours & Treks */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-red-600 font-medium">
+                    Tours & Treks
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[400px]">
+                      <div className="row-span-3">
+                        <h3 className="text-lg font-semibold mb-2">Explore Tours</h3>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Discover amazing destinations with verified tour operators
+                        </p>
+                      </div>
+                      <div className="grid gap-2">
+                        {tourCategories.map((category) => (
+                          <a
+                            key={category.name}
+                            href={category.link}
+                            className="block p-2 rounded hover:bg-red-50 transition-colors"
+                          >
+                            <div className="font-medium">{category.name}</div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Rentals */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-red-600 font-medium">
+                    Rentals
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[400px]">
+                      <div className="row-span-3">
+                        <h3 className="text-lg font-semibold mb-2">Rent Vehicles</h3>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Choose from bikes, cars, and adventure gear
+                        </p>
+                      </div>
+                      <div className="grid gap-2">
+                        {rentalCategories.map((category) => (
+                          <a
+                            key={category.name}
+                            href={category.link}
+                            className="block p-2 rounded hover:bg-red-50 transition-colors"
+                          >
+                            <div className="font-medium">{category.name}</div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Travel Reels */}
+                <NavigationMenuItem>
+                  <a href="/travel-reels" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
+                    Travel Reels
+                  </a>
+                </NavigationMenuItem>
+
+                {/* Community */}
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="text-gray-700 hover:text-red-600 font-medium">
+                    Community
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className="grid gap-3 p-6 w-[400px]">
+                      <div className="row-span-3">
+                        <h3 className="text-lg font-semibold mb-2">Join Communities</h3>
+                        <p className="text-sm text-gray-600 mb-4">
+                          Connect with fellow travelers worldwide
+                        </p>
+                      </div>
+                      <div className="grid gap-2">
+                        {communityCategories.map((category) => (
+                          <a
+                            key={category.name}
+                            href={category.link}
+                            className="block p-2 rounded hover:bg-red-50 transition-colors"
+                          >
+                            <div className="font-medium">{category.name}</div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                {/* Dashboard */}
+                <NavigationMenuItem>
+                  <a href="/dashboard" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
+                    Dashboard
+                  </a>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
 
           {/* Actions */}
@@ -83,10 +201,10 @@ const Navigation = () => {
               <a href="/rentals" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
                 Rentals
               </a>
-              <a href="#reels" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
+              <a href="/travel-reels" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
                 Travel Reels
               </a>
-              <a href="#community" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
+              <a href="/community" className="text-gray-700 hover:text-red-600 transition-colors font-medium">
                 Community
               </a>
               <a href="/dashboard" className="text-gray-700 hover:text-red-600 transition-colors font-medium">

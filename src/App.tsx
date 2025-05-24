@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -12,6 +11,9 @@ import Rentals from "./pages/Rentals";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import TravelReels from "./pages/TravelReels";
+import Community from "./pages/Community";
+import SOSButton from "@/components/SOSButton";
 
 const queryClient = new QueryClient();
 
@@ -35,10 +37,13 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/tours" element={<Tours />} />
               <Route path="/rentals" element={<Rentals />} />
+              <Route path="/travel-reels" element={<TravelReels />} />
+              <Route path="/community" element={<Community />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <SOSButton />
           </BrowserRouter>
         )}
       </TooltipProvider>
