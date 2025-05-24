@@ -16,9 +16,9 @@ const Hero = () => {
       </div>
 
       {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-400/20 rounded-full animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-16 h-16 bg-blue-400/20 rounded-full animate-pulse delay-1000"></div>
-      <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-orange-400/20 rounded-full animate-pulse delay-500"></div>
+      <div className="absolute top-20 left-10 w-20 h-20 bg-red-400/20 rounded-full animate-pulse"></div>
+      <div className="absolute top-40 right-20 w-16 h-16 bg-orange-400/20 rounded-full animate-pulse delay-1000"></div>
+      <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-red-400/20 rounded-full animate-pulse delay-500"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
@@ -31,7 +31,7 @@ const Hero = () => {
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 animate-fade-in delay-200">
             Discover Your Next
-            <span className="block bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
               Adventure
             </span>
           </h1>
@@ -52,7 +52,7 @@ const Hero = () => {
                     <input 
                       type="text" 
                       placeholder="Where to?" 
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -62,7 +62,7 @@ const Hero = () => {
                     <Calendar className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <input 
                       type="date" 
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -70,7 +70,7 @@ const Hero = () => {
                   <label className="text-sm font-medium text-gray-700">Travelers</label>
                   <div className="relative">
                     <Users className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                    <select className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    <select className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent">
                       <option>1 Person</option>
                       <option>2-4 People</option>
                       <option>5+ People</option>
@@ -78,7 +78,7 @@ const Hero = () => {
                   </div>
                 </div>
                 <div className="flex items-end">
-                  <Button className="w-full h-12 bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white font-semibold">
+                  <Button className="w-full h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold">
                     <Search className="w-5 h-5 mr-2" />
                     Explore
                   </Button>
@@ -89,7 +89,7 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in delay-800">
-            <Button size="lg" className="bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white px-8 py-4 text-lg">
+            <Button size="lg" className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-8 py-4 text-lg">
               Start Exploring
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg">
