@@ -26,24 +26,24 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const tourCategories = [
-    { name: "Himalayan Treks", link: "/tours?category=himalayan" },
-    { name: "Beach Destinations", link: "/tours?category=beach" },
-    { name: "Desert Safari", link: "/tours?category=desert" },
-    { name: "Wildlife Tours", link: "/tours?category=wildlife" }
+    { name: "Sahyadri Treks", link: "/tours?category=sahyadri" },
+    { name: "Pune Hill Stations", link: "/tours?category=hills" },
+    { name: "Adventure Camps", link: "/tours?category=adventure" },
+    { name: "Heritage Tours", link: "/tours?category=heritage" }
   ];
 
   const rentalCategories = [
     { name: "Bikes & Motorcycles", link: "/rentals?category=bikes" },
     { name: "Cars & SUVs", link: "/rentals?category=cars" },
-    { name: "Camping Gear", link: "/rentals?category=camping" },
-    { name: "Adventure Equipment", link: "/rentals?category=adventure" }
+    { name: "Trekking Gear", link: "/rentals?category=trekking" },
+    { name: "Camping Equipment", link: "/rentals?category=camping" }
   ];
 
   const communityCategories = [
-    { name: "Local Communities", link: "/community?type=local" },
-    { name: "Travel Groups", link: "/community?type=groups" },
+    { name: "Pune Trekkers", link: "/community?type=pune-trekkers" },
+    { name: "Adventure Groups", link: "/community?type=adventure" },
     { name: "Solo Travelers", link: "/community?type=solo" },
-    { name: "Photography Clubs", link: "/community?type=photography" }
+    { name: "Photography Club", link: "/community?type=photography" }
   ];
 
   return (
@@ -51,11 +51,11 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+          <div className="flex items-center space-x-2" onClick={() => window.location.href = '/'}>
+            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center cursor-pointer">
               <MapPin className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent cursor-pointer">
               Xplorevo
             </span>
           </div>
@@ -72,9 +72,9 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-6 w-[400px]">
                       <div className="row-span-3">
-                        <h3 className="text-lg font-semibold mb-2">Explore Tours</h3>
+                        <h3 className="text-lg font-semibold mb-2">Explore Pune & Maharashtra</h3>
                         <p className="text-sm text-gray-600 mb-4">
-                          Discover amazing destinations with verified tour operators
+                          Discover amazing destinations around Pune with verified tour operators
                         </p>
                       </div>
                       <div className="grid gap-2">
@@ -100,9 +100,9 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-6 w-[400px]">
                       <div className="row-span-3">
-                        <h3 className="text-lg font-semibold mb-2">Rent Vehicles</h3>
+                        <h3 className="text-lg font-semibold mb-2">Rent in Pune</h3>
                         <p className="text-sm text-gray-600 mb-4">
-                          Choose from bikes, cars, and adventure gear
+                          Choose from bikes, cars, and adventure gear in Pune
                         </p>
                       </div>
                       <div className="grid gap-2">
@@ -135,9 +135,9 @@ const Navigation = () => {
                   <NavigationMenuContent>
                     <div className="grid gap-3 p-6 w-[400px]">
                       <div className="row-span-3">
-                        <h3 className="text-lg font-semibold mb-2">Join Communities</h3>
+                        <h3 className="text-lg font-semibold mb-2">Join Pune Communities</h3>
                         <p className="text-sm text-gray-600 mb-4">
-                          Connect with fellow travelers worldwide
+                          Connect with fellow travelers in Pune
                         </p>
                       </div>
                       <div className="grid gap-2">
@@ -180,14 +180,18 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Three Lines */}
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden"
+            className="md:hidden relative w-10 h-10 p-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            <div className="w-6 h-6 flex flex-col justify-center items-center">
+              <span className={`block w-5 h-0.5 bg-gray-600 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-gray-600 transition-all duration-300 mt-1 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`block w-5 h-0.5 bg-gray-600 transition-all duration-300 mt-1 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            </div>
           </Button>
         </div>
 
