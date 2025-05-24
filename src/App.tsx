@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,14 +18,10 @@ import SOSButton from "@/components/SOSButton";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(() => {
-    // Check if user has visited before
-    return !localStorage.getItem('hasVisited');
-  });
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    localStorage.setItem('hasVisited', 'true');
   };
 
   return (

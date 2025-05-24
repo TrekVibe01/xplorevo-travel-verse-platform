@@ -11,22 +11,15 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   const [currentMessage, setCurrentMessage] = useState(0);
 
   const loadingMessages = [
-    "Discovering Pune's hidden gems...",
+    "Discovering hidden gems...",
     "Connecting with local guides...", 
     "Preparing your adventure map...",
-    "Loading scenic routes around Maharashtra...",
-    "Gathering travel stories from Pune...",
+    "Loading scenic routes...",
+    "Gathering travel stories...",
     "Almost ready for your journey..."
   ];
 
   useEffect(() => {
-    // Play startup sound
-    const audio = new Audio();
-    audio.volume = 0.3;
-    // Note: You would need to add an actual audio file to public folder
-    // audio.src = "/startup-nature-sound.mp3";
-    // audio.play().catch(() => {}); // Silently fail if autoplay is blocked
-
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -34,13 +27,13 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           setTimeout(() => onLoadingComplete(), 800);
           return 100;
         }
-        return prev + 2; // Faster loading
+        return prev + 1.5;
       });
-    }, 60);
+    }, 80);
 
     const messageTimer = setInterval(() => {
       setCurrentMessage((prev) => (prev + 1) % loadingMessages.length);
-    }, 1200);
+    }, 1500);
 
     return () => {
       clearInterval(timer);
@@ -75,7 +68,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         </div>
         
         {/* Floating Particles */}
-        {[...Array(15)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={i}
             className="absolute w-2 h-2 bg-white/10 rounded-full animate-pulse"
@@ -101,11 +94,8 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-fade-in">
           Xplorevo
         </h1>
-        <p className="text-xl text-white/90 mb-2 animate-fade-in delay-300">
+        <p className="text-xl text-white/90 mb-8 animate-fade-in delay-300">
           India's First Digital Travel Ecosystem
-        </p>
-        <p className="text-lg text-white/80 mb-8 animate-fade-in delay-400">
-          Discover Pune & Beyond 🌄
         </p>
 
         {/* Progress Bar */}
@@ -133,7 +123,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         <div className="grid grid-cols-2 gap-4 text-white/70 text-xs animate-fade-in delay-1000">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span>Pune Adventures</span>
+            <span>Verified Partners</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-300"></div>
@@ -145,10 +135,15 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-900"></div>
-            <span>24/7 SOS Support</span>
+            <span>24/7 Support</span>
           </div>
         </div>
       </div>
+
+      {/* Audio Element for Nature Sounds */}
+      <audio autoPlay loop className="hidden">
+        <source src="/nature-sounds.mp3" type="audio/mpeg" />
+      </audio>
     </div>
   );
 };
