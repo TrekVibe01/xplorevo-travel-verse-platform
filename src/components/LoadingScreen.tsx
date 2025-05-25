@@ -194,7 +194,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fly {
           0% { transform: translateX(-100px) translateY(0px); }
           50% { transform: translateX(50vw) translateY(-20px); }
