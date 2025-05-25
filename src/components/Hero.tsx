@@ -3,7 +3,11 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Users, Search, Play } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const Hero = () => {
+interface HeroProps {
+  onGetStarted?: () => void;
+}
+
+const Hero = ({ onGetStarted }: HeroProps) => {
   const [currentBg, setCurrentBg] = useState(0);
   
   const backgrounds = [
@@ -109,7 +113,11 @@ const Hero = () => {
 
           {/* CTA Buttons - Mobile Optimized */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-[slideInUp_1s_ease-out] delay-800 px-4">
-            <Button size="lg" className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transform hover:scale-105 transition-all duration-200 shadow-lg">
+            <Button 
+              size="lg" 
+              onClick={onGetStarted}
+              className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
               <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Start Exploring
             </Button>
