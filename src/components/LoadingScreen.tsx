@@ -108,8 +108,12 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
       <div className="text-center relative z-10 max-w-md mx-auto px-4">
         {/* Logo */}
         <div className="mb-6 animate-[zoomIn_1s_ease-out]">
-          <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-white/10 rounded-3xl flex items-center justify-center mb-4 backdrop-blur-sm border border-white/20 shadow-2xl animate-pulse">
-            <MapPin className="w-12 h-12 sm:w-16 sm:h-16 text-white" />
+          <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-white/20 rounded-3xl flex items-center justify-center mb-4 backdrop-blur-sm border border-white/20 shadow-2xl animate-[logoFloat_3s_ease-in-out_infinite]">
+            <img 
+              src="/lovable-uploads/dd4db603-c0e5-47f6-aad9-956b576bb16f.png" 
+              alt="Xplorevo" 
+              className="w-16 h-16 sm:w-20 sm:h-20 animate-[logoPulse_2s_ease-in-out_infinite]"
+            />
           </div>
         </div>
 
@@ -227,6 +231,16 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
         @keyframes fadeIn {
           0% { opacity: 0; }
           100% { opacity: 1; }
+        }
+        
+        @keyframes logoFloat {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        
+        @keyframes logoPulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.1); }
         }
       `}</style>
     </div>

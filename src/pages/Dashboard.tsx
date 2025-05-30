@@ -17,38 +17,66 @@ import {
   Settings,
   LogOut,
   Plus,
-  Eye
+  Eye,
+  Award,
+  BookOpen,
+  Camera,
+  Shield,
+  Heart,
+  Target,
+  Trophy,
+  Smartphone,
+  UserCheck,
+  BarChart3,
+  Package,
+  CreditCard,
+  FileText,
+  AlertTriangle,
+  MessageSquare,
+  Play
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 
 const Dashboard = () => {
-  const [userType, setUserType] = useState("traveler"); // traveler, operator, rental
+  const [userType, setUserType] = useState("traveler");
 
   const dashboardData = {
     traveler: {
-      title: "Traveler Dashboard",
+      title: "Travel Enthusiast Dashboard",
       stats: [
         { label: "Trips Completed", value: "12", icon: MapPin, color: "text-blue-600" },
-        { label: "Countries Visited", value: "3", icon: Star, color: "text-green-600" },
-        { label: "Travel Points", value: "2,450", icon: TrendingUp, color: "text-purple-600" },
-        { label: "Saved Amount", value: "₹45,000", icon: DollarSign, color: "text-red-600" }
+        { label: "Travel Badges", value: "8", icon: Award, color: "text-green-600" },
+        { label: "Bucket List", value: "15", icon: Heart, color: "text-purple-600" },
+        { label: "Loyalty Points", value: "2,450", icon: Star, color: "text-yellow-600" }
       ],
-      recentBookings: [
-        { id: 1, title: "Himalayan Trek", date: "Dec 15, 2024", status: "Confirmed", amount: "₹15,999" },
-        { id: 2, title: "Goa Beach Resort", date: "Nov 28, 2024", status: "Completed", amount: "₹8,999" }
+      features: [
+        { name: "Browse Packages", icon: Package, description: "Filter by destination, budget & ratings" },
+        { name: "Bucket List", icon: Heart, description: "Manage your travel wishlist" },
+        { name: "Group Bookings", icon: Users, description: "Join fellow travelers" },
+        { name: "Travel Journal", icon: BookOpen, description: "Document your adventures" },
+        { name: "Upload Reels", icon: Camera, description: "Share travel content" },
+        { name: "Emergency SOS", icon: Shield, description: "24/7 safety support" },
+        { name: "Women Groups", icon: UserCheck, description: "Safe travel options" },
+        { name: "Leaderboard", icon: Trophy, description: "Top explorer rankings" }
       ]
     },
     operator: {
       title: "Tour Operator Dashboard",
       stats: [
         { label: "Total Bookings", value: "248", icon: Users, color: "text-blue-600" },
-        { label: "Active Packages", value: "12", icon: MapPin, color: "text-green-600" },
-        { label: "Revenue This Month", value: "₹2.4L", icon: DollarSign, color: "text-red-600" },
-        { label: "Average Rating", value: "4.8", icon: Star, color: "text-yellow-600" }
+        { label: "Active Packages", value: "12", icon: Package, color: "text-green-600" },
+        { label: "Monthly Revenue", value: "₹2.4L", icon: DollarSign, color: "text-red-600" },
+        { label: "Partner Rating", value: "4.8", icon: Star, color: "text-yellow-600" }
       ],
-      recentBookings: [
-        { id: 1, title: "Himalayan Trek Package", date: "Today", status: "New Booking", amount: "₹15,999" },
-        { id: 2, title: "Rajasthan Desert Safari", date: "Yesterday", status: "Confirmed", amount: "₹12,499" }
+      features: [
+        { name: "Profile Verification", icon: UserCheck, description: "Get verified partner status" },
+        { name: "Package Management", icon: Package, description: "Create, edit, delete packages" },
+        { name: "Booking Analytics", icon: BarChart3, description: "View performance metrics" },
+        { name: "Payment Dashboard", icon: CreditCard, description: "Track earnings & payouts" },
+        { name: "Customer Feedback", icon: MessageSquare, description: "Reviews & ratings" },
+        { name: "Eco Certification", icon: Award, description: "Sustainable travel badges" },
+        { name: "Demographics", icon: Users, description: "User retention insights" },
+        { name: "Promotional Tools", icon: TrendingUp, description: "Marketing campaigns" }
       ]
     },
     rental: {
@@ -59,9 +87,53 @@ const Dashboard = () => {
         { label: "Monthly Revenue", value: "₹85,000", icon: DollarSign, color: "text-red-600" },
         { label: "Customer Rating", value: "4.6", icon: Star, color: "text-yellow-600" }
       ],
-      recentBookings: [
-        { id: 1, title: "Royal Enfield Classic 350", date: "Today", status: "Rented", amount: "₹800/day" },
-        { id: 2, title: "Maruti Swift Dzire", date: "Yesterday", status: "Returned", amount: "₹1,500/day" }
+      features: [
+        { name: "Inventory Management", icon: Car, description: "Manage vehicles & pricing" },
+        { name: "Doorstep Delivery", icon: MapPin, description: "Home delivery service" },
+        { name: "Insurance Filters", icon: Shield, description: "Coverage options" },
+        { name: "Booking Management", icon: Calendar, description: "Accept & track rentals" },
+        { name: "Customer Reviews", icon: Star, description: "Rating & feedback system" },
+        { name: "Emergency Support", icon: AlertTriangle, description: "Breakdown assistance" },
+        { name: "Analytics Dashboard", icon: BarChart3, description: "Performance insights" },
+        { name: "Payment Processing", icon: CreditCard, description: "Secure transactions" }
+      ]
+    },
+    ambassador: {
+      title: "Campus Ambassador Portal",
+      stats: [
+        { label: "Referrals Made", value: "45", icon: Users, color: "text-blue-600" },
+        { label: "Performance Score", value: "92%", icon: TrendingUp, color: "text-green-600" },
+        { label: "Cash Rewards", value: "₹12,500", icon: DollarSign, color: "text-red-600" },
+        { label: "Leaderboard Rank", value: "#3", icon: Trophy, color: "text-yellow-600" }
+      ],
+      features: [
+        { name: "College Registration", icon: Building, description: "Represent Xplorevo on campus" },
+        { name: "Referral Tracking", icon: Users, description: "Monitor friend signups" },
+        { name: "Performance Metrics", icon: BarChart3, description: "View engagement stats" },
+        { name: "Leaderboard", icon: Trophy, description: "Campus ranking system" },
+        { name: "Certificates", icon: Award, description: "Official recognition" },
+        { name: "Travel Discounts", icon: DollarSign, description: "Exclusive offers" },
+        { name: "Cash Rewards", icon: CreditCard, description: "Monetary incentives" },
+        { name: "Internship Portal", icon: Smartphone, description: "Career opportunities" }
+      ]
+    },
+    admin: {
+      title: "Admin Control Center",
+      stats: [
+        { label: "Total Users", value: "10,248", icon: Users, color: "text-blue-600" },
+        { label: "Active Packages", value: "450", icon: Package, color: "text-green-600" },
+        { label: "Monthly Revenue", value: "₹15.2L", icon: DollarSign, color: "text-red-600" },
+        { label: "Platform Rating", value: "4.7", icon: Star, color: "text-yellow-600" }
+      ],
+      features: [
+        { name: "User Management", icon: UserCheck, description: "Approve/reject registrations" },
+        { name: "Package Moderation", icon: Package, description: "Review travel packages" },
+        { name: "Content Publishing", icon: FileText, description: "Blogs & promotions" },
+        { name: "Emergency Monitoring", icon: AlertTriangle, description: "SOS alert management" },
+        { name: "Trending Reels", icon: Play, description: "Curate featured content" },
+        { name: "Financial Dashboard", icon: BarChart3, description: "Revenue analytics" },
+        { name: "Campaign Insights", icon: TrendingUp, description: "Marketing performance" },
+        { name: "System Settings", icon: Settings, description: "Platform configuration" }
       ]
     }
   };
@@ -76,13 +148,20 @@ const Dashboard = () => {
       <section className="pt-24 pb-8 bg-gradient-to-r from-red-500 to-red-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in">
-                {currentData.title}
-              </h1>
-              <p className="text-red-100 animate-fade-in delay-200">
-                Welcome back! Here's what's happening with your account.
-              </p>
+            <div className="flex items-center gap-4">
+              <img 
+                src="/lovable-uploads/dd4db603-c0e5-47f6-aad9-956b576bb16f.png" 
+                alt="Xplorevo" 
+                className="w-12 h-12 rounded-xl animate-[logoFloat_3s_ease-in-out_infinite]"
+              />
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 animate-fade-in">
+                  {currentData.title}
+                </h1>
+                <p className="text-red-100 animate-fade-in delay-200">
+                  Welcome back! Here's your activity overview.
+                </p>
+              </div>
             </div>
             <div className="flex gap-4 mt-4 md:mt-0">
               <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
@@ -98,17 +177,17 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* User Type Switcher (Demo) */}
+      {/* User Type Switcher */}
       <section className="py-6 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             <Button
               variant={userType === "traveler" ? "default" : "outline"}
               onClick={() => setUserType("traveler")}
               className={userType === "traveler" ? "bg-red-500 hover:bg-red-600" : ""}
             >
               <User className="w-4 h-4 mr-2" />
-              Traveler Demo
+              Travel Enthusiast
             </Button>
             <Button
               variant={userType === "operator" ? "default" : "outline"}
@@ -116,7 +195,7 @@ const Dashboard = () => {
               className={userType === "operator" ? "bg-red-500 hover:bg-red-600" : ""}
             >
               <Building className="w-4 h-4 mr-2" />
-              Tour Operator Demo
+              Tour Operator
             </Button>
             <Button
               variant={userType === "rental" ? "default" : "outline"}
@@ -124,7 +203,23 @@ const Dashboard = () => {
               className={userType === "rental" ? "bg-red-500 hover:bg-red-600" : ""}
             >
               <Car className="w-4 h-4 mr-2" />
-              Rental Partner Demo
+              Rental Partner
+            </Button>
+            <Button
+              variant={userType === "ambassador" ? "default" : "outline"}
+              onClick={() => setUserType("ambassador")}
+              className={userType === "ambassador" ? "bg-red-500 hover:bg-red-600" : ""}
+            >
+              <Trophy className="w-4 h-4 mr-2" />
+              Campus Ambassador
+            </Button>
+            <Button
+              variant={userType === "admin" ? "default" : "outline"}
+              onClick={() => setUserType("admin")}
+              className={userType === "admin" ? "bg-red-500 hover:bg-red-600" : ""}
+            >
+              <Shield className="w-4 h-4 mr-2" />
+              Admin Panel
             </Button>
           </div>
         </div>
@@ -137,7 +232,7 @@ const Dashboard = () => {
             {currentData.stats.map((stat, index) => {
               const IconComponent = stat.icon;
               return (
-                <Card key={index} className="hover:shadow-lg transition-shadow animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div>
@@ -154,136 +249,78 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Features Grid */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            {/* Recent Activity */}
-            <div className="lg:col-span-2">
-              <Card className="animate-fade-in delay-400">
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl font-bold">
-                    {userType === "traveler" ? "Recent Bookings" : "Recent Activity"}
-                  </CardTitle>
-                  <Button variant="outline" size="sm">
-                    <Eye className="w-4 h-4 mr-2" />
-                    View All
-                  </Button>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {currentData.recentBookings.map((booking) => (
-                      <div key={booking.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div>
-                          <h3 className="font-semibold text-gray-900">{booking.title}</h3>
-                          <p className="text-sm text-gray-600">{booking.date}</p>
-                        </div>
-                        <div className="text-right">
-                          <Badge 
-                            variant={booking.status === "Confirmed" ? "default" : "outline"}
-                            className={booking.status === "Confirmed" ? "bg-green-500" : ""}
-                          >
-                            {booking.status}
-                          </Badge>
-                          <p className="text-sm font-semibold text-gray-900 mt-1">{booking.amount}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Quick Actions */}
-            <div>
-              <Card className="animate-fade-in delay-600">
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold">Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {userType === "traveler" && (
-                    <>
-                      <Button className="w-full justify-start bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Book New Trip
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <MapPin className="w-4 h-4 mr-2" />
-                        View Wishlist
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <Star className="w-4 h-4 mr-2" />
-                        Write Review
-                      </Button>
-                    </>
-                  )}
-                  
-                  {userType === "operator" && (
-                    <>
-                      <Button className="w-full justify-start bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Add New Package
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <Users className="w-4 h-4 mr-2" />
-                        Manage Bookings
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <TrendingUp className="w-4 h-4 mr-2" />
-                        View Analytics
-                      </Button>
-                    </>
-                  )}
-                  
-                  {userType === "rental" && (
-                    <>
-                      <Button className="w-full justify-start bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700">
-                        <Plus className="w-4 h-4 mr-2" />
-                        Add Vehicle
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <Car className="w-4 h-4 mr-2" />
-                        Manage Fleet
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        View Bookings
-                      </Button>
-                    </>
-                  )}
-                  
-                  <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Sign Out
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Profile Card */}
-              <Card className="mt-6 animate-fade-in delay-800">
-                <CardHeader>
-                  <CardTitle className="text-lg font-bold">Profile</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
-                      <User className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">Demo User</h3>
-                      <p className="text-sm text-gray-600">demo@xplorevo.com</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" className="w-full mt-4">
-                    Edit Profile
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {currentData.features.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in cursor-pointer" style={{ animationDelay: `${index * 50}ms` }}>
+                  <CardContent className="p-6 text-center">
+                    <IconComponent className="w-10 h-10 text-red-500 mx-auto mb-3" />
+                    <h3 className="font-semibold text-gray-900 mb-2">{feature.name}</h3>
+                    <p className="text-sm text-gray-600">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      {/* Demo Credentials Section */}
+      <section className="py-8 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold text-center">Demo Login Credentials</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Travel Enthusiast</h4>
+                  <p className="text-sm text-gray-600">Email: traveler@xplorevo.com</p>
+                  <p className="text-sm text-gray-600">Password: demo123</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Tour Operator</h4>
+                  <p className="text-sm text-gray-600">Email: operator@xplorevo.com</p>
+                  <p className="text-sm text-gray-600">Password: demo123</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Rental Partner</h4>
+                  <p className="text-sm text-gray-600">Email: rental@xplorevo.com</p>
+                  <p className="text-sm text-gray-600">Password: demo123</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Campus Ambassador</h4>
+                  <p className="text-sm text-gray-600">Email: ambassador@xplorevo.com</p>
+                  <p className="text-sm text-gray-600">Password: demo123</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Admin</h4>
+                  <p className="text-sm text-gray-600">Email: admin@xplorevo.com</p>
+                  <p className="text-sm text-gray-600">Password: admin123</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg border">
+                  <h4 className="font-semibold text-gray-900 mb-2">Google Login</h4>
+                  <p className="text-sm text-gray-600">Use any Google account</p>
+                  <p className="text-sm text-gray-600">for instant access</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      <style>{`
+        @keyframes logoFloat {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-5px) rotate(3deg); }
+        }
+      `}</style>
     </div>
   );
 };

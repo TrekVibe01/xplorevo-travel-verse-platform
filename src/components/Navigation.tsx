@@ -52,9 +52,11 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2" onClick={() => window.location.href = '/'}>
-            <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center cursor-pointer">
-              <MapPin className="w-6 h-6 text-white" />
-            </div>
+            <img 
+              src="/lovable-uploads/dd4db603-c0e5-47f6-aad9-956b576bb16f.png" 
+              alt="Xplorevo" 
+              className="w-10 h-10 rounded-xl cursor-pointer hover:scale-110 transition-transform duration-200"
+            />
             <span className="text-2xl font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent cursor-pointer">
               Xplorevo
             </span>
@@ -70,7 +72,7 @@ const Navigation = () => {
                     Tours & Treks
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 w-[400px]">
+                    <div className="grid gap-3 p-6 w-[400px] bg-white">
                       <div className="row-span-3">
                         <h3 className="text-lg font-semibold mb-2">Explore Pune & Maharashtra</h3>
                         <p className="text-sm text-gray-600 mb-4">
@@ -98,7 +100,7 @@ const Navigation = () => {
                     Rentals
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 w-[400px]">
+                    <div className="grid gap-3 p-6 w-[400px] bg-white">
                       <div className="row-span-3">
                         <h3 className="text-lg font-semibold mb-2">Rent in Pune</h3>
                         <p className="text-sm text-gray-600 mb-4">
@@ -133,7 +135,7 @@ const Navigation = () => {
                     Community
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid gap-3 p-6 w-[400px]">
+                    <div className="grid gap-3 p-6 w-[400px] bg-white">
                       <div className="row-span-3">
                         <h3 className="text-lg font-semibold mb-2">Join Pune Communities</h3>
                         <p className="text-sm text-gray-600 mb-4">
@@ -180,7 +182,7 @@ const Navigation = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button - Three Lines */}
+          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="sm"
