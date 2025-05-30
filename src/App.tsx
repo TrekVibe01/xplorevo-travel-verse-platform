@@ -1,92 +1,73 @@
 
-import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingScreen from "@/components/LoadingScreen";
-import AnimatedLoginExperience from "@/components/AnimatedLoginExperience";
-import AddToHomeScreen from "@/components/AddToHomeScreen";
+import { useState, useEffect } from "react";
+import LoadingScreen from "./components/LoadingScreen";
+import AnimatedLoginExperience from "./components/AnimatedLoginExperience";
 import Index from "./pages/Index";
 import Tours from "./pages/Tours";
-import Rentals from "./pages/Rentals";
-import Auth from "./pages/Auth";
+import TourOperatorProfile from "./pages/TourOperatorProfile";
+import CampusAmbassadorRegistration from "./pages/CampusAmbassadorRegistration";
 import Dashboard from "./pages/Dashboard";
-import NotFound from "./pages/NotFound";
-import TravelReels from "./pages/TravelReels";
+import Auth from "./pages/Auth";
 import Community from "./pages/Community";
-import SOSButton from "@/components/SOSButton";
-import VerticalReels from "@/components/VerticalReels";
+import Rentals from "./pages/Rentals";
+import TravelReels from "./pages/TravelReels";
+import VerticalReels from "./pages/VerticalReels";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(() => {
-    // Always show loading on first visit or refresh
-    return !sessionStorage.getItem('loadingShown');
-  });
-  
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return !!localStorage.getItem('userLoggedIn');
-  });
-  
-  const [showLoginScreen, setShowLoginScreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userCredentials, setUserCredentials] = useState(null);
 
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-    sessionStorage.setItem('loadingShown', 'true');
-  };
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleLogin = (credentials: any) => {
-    localStorage.setItem('userLoggedIn', 'true');
-    localStorage.setItem('userCredentials', JSON.stringify(credentials));
+    setUserCredentials(credentials);
     setIsLoggedIn(true);
-    setShowLoginScreen(false);
   };
 
-  const handleGetStarted = () => {
-    if (!isLoggedIn) {
-      setShowLoginScreen(true);
-    }
-  };
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
-  // Reset loading on page refresh
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      sessionStorage.removeItem('loadingShown');
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, []);
+  if (!isLoggedIn) {
+    return <AnimatedLoginExperience onLogin={handleLogin} />;
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {isLoading ? (
-          <LoadingScreen onLoadingComplete={handleLoadingComplete} />
-        ) : showLoginScreen ? (
-          <AnimatedLoginExperience onLogin={handleLogin} />
-        ) : (
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index onGetStarted={handleGetStarted} />} />
-              <Route path="/tours" element={<Tours />} />
-              <Route path="/rentals" element={<Rentals />} />
-              <Route path="/travel-reels" element={<TravelReels />} />
-              <Route path="/vertical-reels" element={<VerticalReels />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <SOSButton />
-            <AddToHomeScreen />
-          </BrowserRouter>
-        )}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/tours" element={<Tours />} />
+            <Route path="/tour-operator-profile" element={<TourOperatorProfile />} />
+            <Route path="/campus-ambassador" element={<CampusAmbassadorRegistration />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/rentals" element={<Rentals />} />
+            <Route path="/reels" element={<TravelReels />} />
+            <Route path="/vertical-reels" element={<VerticalReels />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

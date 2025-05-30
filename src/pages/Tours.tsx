@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,7 +13,9 @@ import {
   Clock,
   DollarSign,
   Phone,
-  Mail
+  Mail,
+  Gift,
+  UserCheck
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -22,6 +23,8 @@ import Footer from "@/components/Footer";
 const Tours = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTour, setSelectedTour] = useState(null);
+  const [referralCode, setReferralCode] = useState("");
+  const [appliedReferral, setAppliedReferral] = useState(null);
 
   const tours = [
     {
@@ -30,13 +33,15 @@ const Tours = () => {
       location: "Sinhagad, Pune",
       duration: "1 Day",
       price: "₹899",
+      originalPrice: "₹999",
       rating: 4.8,
       reviews: 124,
       image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       category: "Historical Trek",
       difficulty: "Easy",
       description: "Explore the historic Sinhagad Fort with panoramic views of Pune city.",
-      includes: ["Transport", "Guide", "Breakfast", "Entry Fees"]
+      includes: ["Transport", "Guide", "Breakfast", "Entry Fees"],
+      operator: "Sahyadri Adventures"
     },
     {
       id: 2,
@@ -82,8 +87,36 @@ const Tours = () => {
     }
   ];
 
+  // Campus Ambassador referral codes
+  const validReferrals = {
+    "PRIYA2024": { name: "Priya Sharma", college: "Pune University", discount: 15 },
+    "ARJUN2024": { name: "Arjun Patel", college: "VIT Pune", discount: 20 },
+    "SNEHA2024": { name: "Sneha Kulkarni", college: "COEP", discount: 10 },
+    "CAMPUS10": { name: "Campus Ambassador", college: "General", discount: 10 }
+  };
+
+  const applyReferralCode = () => {
+    if (validReferrals[referralCode.toUpperCase()]) {
+      setAppliedReferral(validReferrals[referralCode.toUpperCase()]);
+    } else {
+      alert("Invalid referral code. Please check and try again.");
+    }
+  };
+
+  const calculateDiscountedPrice = (price: string) => {
+    if (!appliedReferral) return price;
+    const numPrice = parseInt(price.replace('₹', '').replace(',', ''));
+    const discountedPrice = numPrice - (numPrice * appliedReferral.discount / 100);
+    return `₹${discountedPrice.toFixed(0)}`;
+  };
+
   const handleBookNow = (tour) => {
     setSelectedTour(tour);
+  };
+
+  const handleOperatorClick = (operatorName: string) => {
+    // Navigate to operator profile
+    window.location.href = '/tour-operator-profile';
   };
 
   return (
@@ -118,6 +151,28 @@ const Tours = () => {
                 className="pl-10"
               />
             </div>
+            
+            {/* Referral Code Section */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-gradient-to-r from-purple-50 to-blue-50 px-3 py-2 rounded-lg border">
+                <Gift className="w-4 h-4 text-purple-500" />
+                <Input
+                  type="text"
+                  placeholder="Campus Ambassador Code"
+                  value={referralCode}
+                  onChange={(e) => setReferralCode(e.target.value)}
+                  className="w-40 h-8 text-sm border-0 bg-transparent"
+                />
+                <Button 
+                  size="sm" 
+                  onClick={applyReferralCode}
+                  className="bg-purple-500 hover:bg-purple-600 h-8 px-3"
+                >
+                  Apply
+                </Button>
+              </div>
+            </div>
+            
             <div className="flex gap-4">
               <Button variant="outline" className="flex items-center gap-2">
                 <Filter className="w-4 h-4" />
@@ -127,6 +182,17 @@ const Tours = () => {
               <Button variant="outline">Duration</Button>
             </div>
           </div>
+          
+          {/* Applied Referral Display */}
+          {appliedReferral && (
+            <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2">
+              <UserCheck className="w-5 h-5 text-green-600" />
+              <span className="text-green-800 font-medium">
+                {appliedReferral.discount}% discount applied! 
+                Thanks to Campus Ambassador {appliedReferral.name} from {appliedReferral.college}
+              </span>
+            </div>
+          )}
         </div>
       </section>
 
@@ -148,6 +214,11 @@ const Tours = () => {
                   <Badge className="absolute top-4 right-4 bg-white text-gray-800">
                     {tour.difficulty}
                   </Badge>
+                  {appliedReferral && (
+                    <Badge className="absolute bottom-4 left-4 bg-green-500 text-white">
+                      {appliedReferral.discount}% OFF
+                    </Badge>
+                  )}
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-gray-900">
@@ -158,6 +229,16 @@ const Tours = () => {
                     {tour.location}
                   </div>
                   <p className="text-sm text-gray-600">{tour.description}</p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-gray-600">by</span>
+                    <Button
+                      variant="link"
+                      className="text-red-600 hover:text-red-700 p-0 h-auto font-semibold"
+                      onClick={() => handleOperatorClick(tour.operator)}
+                    >
+                      {tour.operator}
+                    </Button>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -187,7 +268,16 @@ const Tours = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <DollarSign className="w-4 h-4 text-green-600" />
-                        <span className="text-2xl font-bold text-red-600">{tour.price}</span>
+                        {appliedReferral ? (
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg text-gray-400 line-through">{tour.price}</span>
+                            <span className="text-2xl font-bold text-green-600">
+                              {calculateDiscountedPrice(tour.price)}
+                            </span>
+                          </div>
+                        ) : (
+                          <span className="text-2xl font-bold text-red-600">{tour.price}</span>
+                        )}
                         <span className="text-sm text-gray-500">per person</span>
                       </div>
                     </div>
@@ -206,12 +296,17 @@ const Tours = () => {
         </div>
       </section>
 
-      {/* Booking Modal */}
+      {/* Enhanced Booking Modal */}
       {selectedTour && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <Card className="w-full max-w-md bg-white">
+          <Card className="w-full max-w-md bg-white max-h-[90vh] overflow-y-auto">
             <CardHeader>
               <CardTitle className="text-xl font-bold">Book {selectedTour.title}</CardTitle>
+              {appliedReferral && (
+                <div className="text-sm text-green-600 font-medium">
+                  Campus Ambassador Discount Applied: {appliedReferral.discount}% OFF
+                </div>
+              )}
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
