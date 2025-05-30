@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +33,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
     password: '',
     name: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Enhanced demo credentials with more user types
   const demoAccounts = [
@@ -69,17 +69,45 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const handleDemoLogin = (account: any) => {
+  const handleDemoLogin = async (account: any) => {
+    setIsSubmitting(true);
     setFormData({ email: account.email, password: account.password, name: '' });
+    
+    console.log('Demo login attempt:', account);
+    
+    // Simulate a brief loading time
     setTimeout(() => {
       onLogin(account);
+      setIsSubmitting(false);
     }, 1000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const account = demoAccounts.find(acc => acc.email === formData.email);
-    onLogin(account || { email: formData.email, role: 'User' });
+    setIsSubmitting(true);
+    
+    console.log('Form submission:', formData);
+    
+    // Check if credentials match demo accounts
+    const account = demoAccounts.find(acc => 
+      acc.email.toLowerCase() === formData.email.toLowerCase() && 
+      acc.password === formData.password
+    );
+    
+    setTimeout(() => {
+      if (account) {
+        console.log('Valid credentials found:', account);
+        onLogin(account);
+      } else {
+        console.log('Creating new user account');
+        onLogin({ 
+          email: formData.email, 
+          role: 'Travel Enthusiast',
+          name: formData.name || 'User'
+        });
+      }
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
@@ -191,7 +219,8 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 <Button
                   key={index}
                   onClick={() => handleDemoLogin(account)}
-                  className={`w-full text-left justify-start bg-gradient-to-r ${account.color} hover:opacity-90 text-white border-0 transform hover:scale-105 transition-all duration-200 shadow-lg`}
+                  disabled={isSubmitting}
+                  className={`w-full text-left justify-start bg-gradient-to-r ${account.color} hover:opacity-90 text-white border-0 transform hover:scale-105 transition-all duration-200 shadow-lg disabled:opacity-50`}
                   variant="outline"
                 >
                   <User className="w-4 h-4 mr-2" />
@@ -230,6 +259,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className="pl-10 border-gray-200 focus:border-red-500 focus:ring-red-500 transition-all duration-300 hover:border-red-300"
+                required
               />
             </div>
             
@@ -241,14 +271,16 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
                 className="pl-10 border-gray-200 focus:border-red-500 focus:ring-red-500 transition-all duration-300 hover:border-red-300"
+                required
               />
             </div>
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50"
             >
-              {isLogin ? '🚀 Start Journey' : '🌟 Join Adventure'}
+              {isSubmitting ? '🚀 Signing In...' : (isLogin ? '🚀 Start Journey' : '🌟 Join Adventure')}
             </Button>
           </form>
 

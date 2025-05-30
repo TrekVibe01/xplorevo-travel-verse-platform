@@ -36,12 +36,17 @@ const App = () => {
   }, []);
 
   const handleLogin = (credentials: any) => {
+    console.log('Login attempt with:', credentials);
     setUserCredentials(credentials);
     setIsLoggedIn(true);
   };
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
   }
 
   if (!isLoggedIn) {
