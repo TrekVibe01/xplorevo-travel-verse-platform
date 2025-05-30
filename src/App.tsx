@@ -36,14 +36,31 @@ const App = () => {
   }, []);
 
   const handleLogin = (credentials: any) => {
-    console.log('Login attempt with:', credentials);
+    console.log('=== App.tsx handleLogin called ===');
+    console.log('Received credentials:', credentials);
+    
     setUserCredentials(credentials);
     setIsLoggedIn(true);
+    
+    console.log('Login state updated - isLoggedIn:', true);
+    console.log('=== Login process complete ===');
   };
 
   const handleLoadingComplete = () => {
+    console.log('Loading completed');
     setIsLoading(false);
   };
+
+  const handleLogout = () => {
+    console.log('Logging out user');
+    setIsLoggedIn(false);
+    setUserCredentials(null);
+  };
+
+  console.log('=== App.tsx Render ===');
+  console.log('isLoading:', isLoading);
+  console.log('isLoggedIn:', isLoggedIn);
+  console.log('userCredentials:', userCredentials);
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
@@ -73,6 +90,16 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        
+        {/* Debug info in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="fixed bottom-4 right-4 bg-black/80 text-white p-2 rounded text-xs z-50">
+            User: {userCredentials?.role || 'Unknown'} | Email: {userCredentials?.email || 'N/A'}
+            <button onClick={handleLogout} className="ml-2 text-red-300 hover:text-red-100">
+              Logout
+            </button>
+          </div>
+        )}
       </TooltipProvider>
     </QueryClientProvider>
   );

@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,6 +35,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
     name: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   // Enhanced demo credentials with more user types
   const demoAccounts = [
@@ -70,44 +72,73 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
   }, []);
 
   const handleDemoLogin = async (account: any) => {
+    console.log('=== Demo Login Start ===');
+    console.log('Account:', account);
+    
     setIsSubmitting(true);
+    setError('');
     setFormData({ email: account.email, password: account.password, name: '' });
     
-    console.log('Demo login attempt:', account);
-    
-    // Simulate a brief loading time
-    setTimeout(() => {
+    try {
+      // Simulate a brief loading time
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log('Calling onLogin with account:', account);
       onLogin(account);
+      console.log('=== Demo Login Success ===');
+    } catch (err) {
+      console.error('Demo login error:', err);
+      setError('Login failed. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('=== Form Submit Start ===');
+    console.log('Form data:', formData);
+    
     setIsSubmitting(true);
+    setError('');
     
-    console.log('Form submission:', formData);
+    // Validate form
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all required fields');
+      setIsSubmitting(false);
+      return;
+    }
     
-    // Check if credentials match demo accounts
-    const account = demoAccounts.find(acc => 
-      acc.email.toLowerCase() === formData.email.toLowerCase() && 
-      acc.password === formData.password
-    );
-    
-    setTimeout(() => {
+    try {
+      // Check if credentials match demo accounts
+      const account = demoAccounts.find(acc => 
+        acc.email.toLowerCase() === formData.email.toLowerCase() && 
+        acc.password === formData.password
+      );
+      
+      // Simulate loading time
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       if (account) {
-        console.log('Valid credentials found:', account);
+        console.log('Valid demo credentials found:', account);
         onLogin(account);
       } else {
         console.log('Creating new user account');
-        onLogin({ 
+        const newUser = { 
           email: formData.email, 
           role: 'Travel Enthusiast',
           name: formData.name || 'User'
-        });
+        };
+        onLogin(newUser);
       }
+      
+      console.log('=== Form Submit Success ===');
+    } catch (err) {
+      console.error('Form submit error:', err);
+      setError('Login failed. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -208,6 +239,13 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
         </CardHeader>
 
         <CardContent className="space-y-4">
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm animate-fade-in">
+              {error}
+            </div>
+          )}
+
           {/* Enhanced Demo Accounts */}
           <div className="mb-6">
             <p className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
@@ -247,6 +285,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="pl-10 border-gray-200 focus:border-red-500 focus:ring-red-500 transition-all duration-300 hover:border-red-300"
+                  disabled={isSubmitting}
                 />
               </div>
             )}
@@ -260,6 +299,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className="pl-10 border-gray-200 focus:border-red-500 focus:ring-red-500 transition-all duration-300 hover:border-red-300"
                 required
+                disabled={isSubmitting}
               />
             </div>
             
@@ -272,6 +312,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 onChange={(e) => setFormData({...formData, password: e.target.value})}
                 className="pl-10 border-gray-200 focus:border-red-500 focus:ring-red-500 transition-all duration-300 hover:border-red-300"
                 required
+                disabled={isSubmitting}
               />
             </div>
 
@@ -292,6 +333,7 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 onClick={() => setIsLogin(!isLogin)}
                 variant="link"
                 className="text-red-600 hover:text-red-700 font-semibold ml-1 p-0 transform hover:scale-105 transition-all duration-200"
+                disabled={isSubmitting}
               >
                 {isLogin ? '🎯 Join Now' : '🏠 Sign In'}
               </Button>
@@ -322,6 +364,14 @@ const AnimatedLoginExperience = ({ onLogin }: AnimatedLoginExperienceProps) => {
                 <span>Safe Travels</span>
               </div>
             </div>
+          </div>
+
+          {/* Login Instructions */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-700">
+            <strong>🔑 Demo Login Instructions:</strong>
+            <br />• Click any demo button above for instant access
+            <br />• Or use: admin@xplorevo.com / admin123
+            <br />• Or use: traveler@xplorevo.com / traveler123
           </div>
         </CardContent>
       </Card>
