@@ -99,24 +99,6 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-        
-        {/* Debug info in development */}
-        {process.env.NODE_ENV === 'development' && (
-          <div className="fixed bottom-4 right-4 bg-black/80 text-white p-2 rounded text-xs z-50">
-            {isLoggedIn ? (
-              <>
-                User: {userCredentials?.role || 'Unknown'} | Email: {userCredentials?.email || 'N/A'}
-                <button onClick={handleLogout} className="ml-2 text-red-300 hover:text-red-100">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <button onClick={handleShowLogin} className="text-blue-300 hover:text-blue-100">
-                Login
-              </button>
-            )}
-          </div>
-        )}
       </TooltipProvider>
     </QueryClientProvider>
   );
