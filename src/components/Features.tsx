@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Calendar, Users, Camera, Car, Shield } from "lucide-react";
+import { MapPin, Calendar, Users, Camera, Car, Shield, Plus, Download, Smartphone } from "lucide-react";
 import SOSButton from "./SOSButton";
 import AddToHomeScreen from "./AddToHomeScreen";
 
@@ -55,19 +55,65 @@ const Features = () => {
     window.location.href = '/vertical-reels';
   };
 
+  const handleInstallApp = () => {
+    // This will trigger the add to home screen functionality
+    if ('serviceWorker' in navigator) {
+      // For demonstration, we'll show an alert
+      alert('Add Xplorevo to your home screen for quick access! Look for the "Add to Home Screen" option in your browser menu.');
+    }
+  };
+
   return (
-    <section id="tours" className="py-24 bg-gradient-to-br from-slate-50 to-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="tours" className="py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-red-500 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-amber-500 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-purple-500 rounded-full blur-2xl"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8 font-serif">
             Premium Travel
-            <span className="block bg-gradient-to-r from-amber-600 via-rose-600 to-purple-600 bg-clip-text text-transparent font-serif">
+            <span className="block bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 bg-clip-text text-transparent font-serif">
               Experiences
             </span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed mb-12">
             Curated adventures for the discerning traveler. Experience luxury, safety, and unforgettable moments with our premium travel ecosystem.
           </p>
+
+          {/* Enhanced Add to Home Screen Section */}
+          <div className="mb-16">
+            <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-amber-500 text-white border-0 max-w-2xl mx-auto overflow-hidden rounded-2xl shadow-2xl">
+              <CardContent className="p-8">
+                <div className="text-center">
+                  <Smartphone className="w-16 h-16 mx-auto mb-4 animate-bounce" />
+                  <h3 className="text-2xl font-bold mb-4">Get the Xplorevo App Experience</h3>
+                  <p className="text-lg mb-6 opacity-90">
+                    Add our site to your home screen for instant access to your travel companion
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                    <Button 
+                      onClick={handleInstallApp}
+                      className="bg-white text-red-600 hover:bg-gray-100 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add to Home
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="border-white text-white hover:bg-white hover:text-red-600 font-semibold rounded-xl"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Learn More
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -98,7 +144,7 @@ const Features = () => {
               <CardContent>
                 <Button 
                   variant="outline" 
-                  className="w-full group-hover:bg-gradient-to-r group-hover:from-amber-500 group-hover:to-rose-600 group-hover:text-white group-hover:border-transparent transition-all duration-500 font-medium rounded-xl"
+                  className="w-full group-hover:bg-gradient-to-r group-hover:from-red-500 group-hover:to-orange-600 group-hover:text-white group-hover:border-transparent transition-all duration-500 font-medium rounded-xl"
                   onClick={feature.title === "Travel Reels" ? handleReelsClick : undefined}
                 >
                   Explore Now
@@ -116,7 +162,7 @@ const Features = () => {
                 <div className="p-12 md:p-16">
                   <h3 className="text-4xl md:text-5xl font-bold mb-6 font-serif">
                     Solo Travel
-                    <span className="block text-transparent bg-gradient-to-r from-amber-400 to-rose-400 bg-clip-text">
+                    <span className="block text-transparent bg-gradient-to-r from-red-400 via-orange-400 to-amber-400 bg-clip-text">
                       Redefined
                     </span>
                   </h3>
@@ -125,19 +171,19 @@ const Features = () => {
                   </p>
                   <div className="space-y-4 mb-10">
                     <div className="flex items-center space-x-4">
-                      <Shield className="w-6 h-6 text-amber-400" />
+                      <Shield className="w-6 h-6 text-red-400" />
                       <span className="text-lg font-light">24/7 Emergency Response System</span>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <Users className="w-6 h-6 text-rose-400" />
+                      <Users className="w-6 h-6 text-orange-400" />
                       <span className="text-lg font-light">Curated Solo Traveler Communities</span>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <Calendar className="w-6 h-6 text-purple-400" />
+                      <Calendar className="w-6 h-6 text-amber-400" />
                       <span className="text-lg font-light">Premium Concierge Support</span>
                     </div>
                   </div>
-                  <Button size="lg" className="bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-semibold px-8 py-4 rounded-xl text-lg">
+                  <Button size="lg" className="bg-gradient-to-r from-red-500 via-orange-500 to-amber-500 hover:from-red-600 hover:via-orange-600 hover:to-amber-600 text-white font-semibold px-8 py-4 rounded-xl text-lg">
                     Discover Solo Adventures
                   </Button>
                 </div>

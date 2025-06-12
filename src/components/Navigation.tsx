@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin, Users, Calendar, Car, Shield, Briefcase } from "lucide-react";
+import { Menu, X, MapPin, Users, Calendar, Car, Shield, Briefcase, UserPlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
@@ -43,10 +43,14 @@ const Navigation = () => {
             className="flex items-center cursor-pointer group"
             onClick={() => handleNavigation("/")}
           >
-            <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              <MapPin className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 mr-3 group-hover:scale-110 transition-transform duration-300">
+              <img 
+                src="/lovable-uploads/8fb34dfa-5392-4cc1-92af-701d4bafca1e.png" 
+                alt="Xplorevo" 
+                className="w-full h-full object-contain"
+              />
             </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent font-serif">
+            <span className="text-2xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-amber-600 bg-clip-text text-transparent font-serif tracking-wide">
               Xplorevo
             </span>
           </div>
@@ -59,13 +63,22 @@ const Navigation = () => {
                 <button
                   key={item.label}
                   onClick={() => handleNavigation(item.path)}
-                  className="flex items-center space-x-2 text-gray-700 hover:text-amber-600 transition-colors duration-300 font-medium group"
+                  className="flex items-center space-x-2 text-gray-800 hover:text-red-600 transition-colors duration-300 font-semibold text-lg group"
                 >
-                  <Icon className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+                  <Icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                   <span>{item.label}</span>
                 </button>
               );
             })}
+            
+            {/* Ambassador Registration Button */}
+            <Button 
+              onClick={() => handleNavigation("/campus-ambassador")}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <UserPlus className="w-4 h-4 mr-2" />
+              Ambassador
+            </Button>
             
             {/* Become a Partner Button */}
             <Button 
@@ -83,7 +96,7 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-amber-600"
+              className="text-gray-700 hover:text-red-600"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
@@ -100,13 +113,22 @@ const Navigation = () => {
                   <button
                     key={item.label}
                     onClick={() => handleNavigation(item.path)}
-                    className="flex items-center space-x-3 w-full text-left text-gray-700 hover:text-amber-600 transition-colors duration-300 font-medium p-3 hover:bg-amber-50 rounded-xl"
+                    className="flex items-center space-x-3 w-full text-left text-gray-700 hover:text-red-600 transition-colors duration-300 font-semibold p-3 hover:bg-red-50 rounded-xl text-lg"
                   >
                     <Icon className="w-5 h-5" />
                     <span>{item.label}</span>
                   </button>
                 );
               })}
+              
+              {/* Mobile Ambassador Registration Button */}
+              <Button 
+                onClick={() => handleNavigation("/campus-ambassador")}
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <UserPlus className="w-4 h-4 mr-2" />
+                Ambassador Registration
+              </Button>
               
               {/* Mobile Become a Partner Button */}
               <Button 
