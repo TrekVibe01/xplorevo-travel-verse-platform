@@ -24,6 +24,7 @@ const queryClient = new QueryClient();
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   const [userCredentials, setUserCredentials] = useState(null);
 
   useEffect(() => {
@@ -41,9 +42,15 @@ const App = () => {
     
     setUserCredentials(credentials);
     setIsLoggedIn(true);
+    setShowLogin(false);
     
     console.log('Login state updated - isLoggedIn:', true);
     console.log('=== Login process complete ===');
+  };
+
+  const handleShowLogin = () => {
+    console.log('Showing login screen');
+    setShowLogin(true);
   };
 
   const handleLoadingComplete = () => {
@@ -55,18 +62,20 @@ const App = () => {
     console.log('Logging out user');
     setIsLoggedIn(false);
     setUserCredentials(null);
+    setShowLogin(false);
   };
 
   console.log('=== App.tsx Render ===');
   console.log('isLoading:', isLoading);
   console.log('isLoggedIn:', isLoggedIn);
+  console.log('showLogin:', showLogin);
   console.log('userCredentials:', userCredentials);
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
   }
 
-  if (!isLoggedIn) {
+  if (showLogin && !isLoggedIn) {
     return <AnimatedLoginExperience onLogin={handleLogin} />;
   }
 
@@ -77,7 +86,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Index onGetStarted={handleShowLogin} />} />
             <Route path="/tours" element={<Tours />} />
             <Route path="/tour-operator-profile" element={<TourOperatorProfile />} />
             <Route path="/campus-ambassador" element={<CampusAmbassadorRegistration />} />
@@ -94,10 +103,18 @@ const App = () => {
         {/* Debug info in development */}
         {process.env.NODE_ENV === 'development' && (
           <div className="fixed bottom-4 right-4 bg-black/80 text-white p-2 rounded text-xs z-50">
-            User: {userCredentials?.role || 'Unknown'} | Email: {userCredentials?.email || 'N/A'}
-            <button onClick={handleLogout} className="ml-2 text-red-300 hover:text-red-100">
-              Logout
-            </button>
+            {isLoggedIn ? (
+              <>
+                User: {userCredentials?.role || 'Unknown'} | Email: {userCredentials?.email || 'N/A'}
+                <button onClick={handleLogout} className="ml-2 text-red-300 hover:text-red-100">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button onClick={handleShowLogin} className="text-blue-300 hover:text-blue-100">
+                Login
+              </button>
+            )}
           </div>
         )}
       </TooltipProvider>
