@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,7 +14,8 @@ import {
   Car,
   Shield,
   MapPin,
-  Instagram
+  Instagram,
+  GraduationCap
 } from "lucide-react";
 
 const Auth = () => {
@@ -44,6 +44,13 @@ const Auth = () => {
       icon: Car, 
       color: "from-orange-500 to-orange-600",
       description: "List your vehicles and properties" 
+    },
+    { 
+      id: "ambassador", 
+      name: "Campus Ambassador", 
+      icon: GraduationCap, 
+      color: "from-purple-500 to-purple-600",
+      description: "Earn rewards by promoting Xplorevo" 
     },
     { 
       id: "admin", 
@@ -156,6 +163,19 @@ const Auth = () => {
                 </div>
               )}
 
+              {/* Campus Ambassador Notice */}
+              {!isLogin && userType === "ambassador" && (
+                <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 animate-fade-in">
+                  <div className="flex items-center gap-2 text-purple-700">
+                    <GraduationCap className="w-4 h-4" />
+                    <span className="text-sm font-medium">Campus Ambassador Program</span>
+                  </div>
+                  <p className="text-xs text-purple-600 mt-1">
+                    Join our exclusive program and earn rewards for promoting Xplorevo in your college!
+                  </p>
+                </div>
+              )}
+
               {/* Admin Notice */}
               {!isLogin && userType === "admin" && (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4 animate-fade-in">
@@ -190,6 +210,17 @@ const Auth = () => {
                     className="pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
                   />
                 </div>
+
+                {!isLogin && userType === "ambassador" && (
+                  <div className="relative group">
+                    <Building className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+                    <Input
+                      type="text"
+                      placeholder="College/University Name"
+                      className="pl-10 h-12 border-gray-200 focus:border-purple-500 focus:ring-purple-500"
+                    />
+                  </div>
+                )}
 
                 {!isLogin && (
                   <div className="relative group">

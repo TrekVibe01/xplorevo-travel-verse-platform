@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,12 +32,26 @@ import {
   FileText,
   AlertTriangle,
   MessageSquare,
-  Play
+  Play,
+  GraduationCap
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import CampusAmbassadorDashboard from "@/components/CampusAmbassadorDashboard";
 
 const Dashboard = () => {
   const [userType, setUserType] = useState("traveler");
+
+  // If ambassador is selected, show the dedicated ambassador dashboard
+  if (userType === "ambassador") {
+    return (
+      <div>
+        <Navigation />
+        <div className="pt-16">
+          <CampusAmbassadorDashboard />
+        </div>
+      </div>
+    );
+  }
 
   const dashboardData = {
     traveler: {
@@ -96,25 +109,6 @@ const Dashboard = () => {
         { name: "Emergency Support", icon: AlertTriangle, description: "Breakdown assistance" },
         { name: "Analytics Dashboard", icon: BarChart3, description: "Performance insights" },
         { name: "Payment Processing", icon: CreditCard, description: "Secure transactions" }
-      ]
-    },
-    ambassador: {
-      title: "Campus Ambassador Portal",
-      stats: [
-        { label: "Referrals Made", value: "45", icon: Users, color: "text-blue-600" },
-        { label: "Performance Score", value: "92%", icon: TrendingUp, color: "text-green-600" },
-        { label: "Cash Rewards", value: "₹12,500", icon: DollarSign, color: "text-red-600" },
-        { label: "Leaderboard Rank", value: "#3", icon: Trophy, color: "text-yellow-600" }
-      ],
-      features: [
-        { name: "College Registration", icon: Building, description: "Represent Xplorevo on campus" },
-        { name: "Referral Tracking", icon: Users, description: "Monitor friend signups" },
-        { name: "Performance Metrics", icon: BarChart3, description: "View engagement stats" },
-        { name: "Leaderboard", icon: Trophy, description: "Campus ranking system" },
-        { name: "Certificates", icon: Award, description: "Official recognition" },
-        { name: "Travel Discounts", icon: DollarSign, description: "Exclusive offers" },
-        { name: "Cash Rewards", icon: CreditCard, description: "Monetary incentives" },
-        { name: "Internship Portal", icon: Smartphone, description: "Career opportunities" }
       ]
     },
     admin: {
@@ -208,9 +202,9 @@ const Dashboard = () => {
             <Button
               variant={userType === "ambassador" ? "default" : "outline"}
               onClick={() => setUserType("ambassador")}
-              className={userType === "ambassador" ? "bg-red-500 hover:bg-red-600" : ""}
+              className={userType === "ambassador" ? "bg-purple-500 hover:bg-purple-600" : ""}
             >
-              <Trophy className="w-4 h-4 mr-2" />
+              <GraduationCap className="w-4 h-4 mr-2" />
               Campus Ambassador
             </Button>
             <Button
