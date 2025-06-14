@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +18,7 @@ import Rentals from "./pages/Rentals";
 import TravelReels from "./pages/TravelReels";
 import VerticalReels from "./pages/VerticalReels";
 import NotFound from "./pages/NotFound";
+import ApiDashboard from "./components/ApiDashboard";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +68,7 @@ const App = () => {
               <Route path="/rentals" element={<Rentals />} />
               <Route path="/reels" element={<TravelReels />} />
               <Route path="/vertical-reels" element={<VerticalReels />} />
+              <Route path="/api-dashboard" element={<ApiDashboard />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
