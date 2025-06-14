@@ -7,15 +7,11 @@ import TravelReels from "@/components/TravelReels";
 import CampusAmbassador from "@/components/CampusAmbassador";
 import Footer from "@/components/Footer";
 
-interface IndexProps {
-  onGetStarted?: () => void;
-}
-
-const Index = ({ onGetStarted }: IndexProps) => {
+const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-amber-50 to-orange-50">
       <Navigation />
-      <Hero onGetStarted={onGetStarted} />
+      <Hero />
       <Features />
       <TravelReels />
       <CampusAmbassador />
