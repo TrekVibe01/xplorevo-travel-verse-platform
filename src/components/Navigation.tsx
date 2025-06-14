@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, MapPin, Users, Calendar, Car, Shield, Briefcase, UserPlus } from "lucide-react";
+import { Menu, X, MapPin, Users, Calendar, Car, Shield, Briefcase, LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
@@ -71,13 +71,13 @@ const Navigation = () => {
               );
             })}
             
-            {/* Ambassador Registration Button */}
+            {/* Login Button */}
             <Button 
-              onClick={() => handleNavigation("/campus-ambassador")}
+              onClick={() => handleNavigation("/auth")}
               className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
-              <UserPlus className="w-4 h-4 mr-2" />
-              Ambassador
+              <LogIn className="w-4 h-4 mr-2" />
+              Login
             </Button>
             
             {/* Become a Partner Button */}
@@ -121,13 +121,13 @@ const Navigation = () => {
                 );
               })}
               
-              {/* Mobile Ambassador Registration Button */}
+              {/* Mobile Login Button */}
               <Button 
-                onClick={() => handleNavigation("/campus-ambassador")}
+                onClick={() => handleNavigation("/auth")}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <UserPlus className="w-4 h-4 mr-2" />
-                Ambassador Registration
+                <LogIn className="w-4 h-4 mr-2" />
+                Login
               </Button>
               
               {/* Mobile Become a Partner Button */}

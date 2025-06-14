@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Calendar, Users, Camera, Car, Shield, Plus, Download, Smartphone } from "lucide-react";
+import { MapPin, Calendar, Users, Camera, Car, Shield } from "lucide-react";
 import SOSButton from "./SOSButton";
 import AddToHomeScreen from "./AddToHomeScreen";
 
@@ -55,14 +55,6 @@ const Features = () => {
     window.location.href = '/vertical-reels';
   };
 
-  const handleInstallApp = () => {
-    // This will trigger the add to home screen functionality
-    if ('serviceWorker' in navigator) {
-      // For demonstration, we'll show an alert
-      alert('Add Xplorevo to your home screen for quick access! Look for the "Add to Home Screen" option in your browser menu.');
-    }
-  };
-
   return (
     <section id="tours" className="py-24 bg-gradient-to-br from-slate-50 to-gray-100 relative overflow-hidden">
       {/* Background Pattern */}
@@ -80,40 +72,9 @@ const Features = () => {
               Experiences
             </span>
           </h2>
-          <p className="text-xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed mb-12">
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto font-light leading-relaxed">
             Curated adventures for the discerning traveler. Experience luxury, safety, and unforgettable moments with our premium travel ecosystem.
           </p>
-
-          {/* Enhanced Add to Home Screen Section */}
-          <div className="mb-16">
-            <Card className="bg-gradient-to-r from-red-500 via-orange-500 to-amber-500 text-white border-0 max-w-2xl mx-auto overflow-hidden rounded-2xl shadow-2xl">
-              <CardContent className="p-8">
-                <div className="text-center">
-                  <Smartphone className="w-16 h-16 mx-auto mb-4 animate-bounce" />
-                  <h3 className="text-2xl font-bold mb-4">Get the Xplorevo App Experience</h3>
-                  <p className="text-lg mb-6 opacity-90">
-                    Add our site to your home screen for instant access to your travel companion
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                    <Button 
-                      onClick={handleInstallApp}
-                      className="bg-white text-red-600 hover:bg-gray-100 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      Add to Home
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      className="border-white text-white hover:bg-white hover:text-red-600 font-semibold rounded-xl"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Learn More
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -204,7 +165,7 @@ const Features = () => {
       {/* Emergency SOS Button */}
       <SOSButton />
       
-      {/* Add to Home Screen Button */}
+      {/* Add to Home Screen Button (now smaller and sliding from left) */}
       <AddToHomeScreen />
     </section>
   );
