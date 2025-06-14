@@ -1,19 +1,11 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { useToast } from '@/hooks/use-toast';
+import type { Database } from '@/integrations/supabase/types';
 
-interface Profile {
-  id: string;
-  email: string;
-  full_name?: string;
-  phone?: string;
-  college_name?: string;
-  user_type: string;
-  avatar_url?: string;
-  created_at: string;
-  updated_at: string;
-}
+type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export const useProfile = () => {
   const [profile, setProfile] = useState<Profile | null>(null);

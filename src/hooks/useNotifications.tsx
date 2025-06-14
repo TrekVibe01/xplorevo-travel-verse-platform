@@ -2,17 +2,9 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
+import type { Database } from '@/integrations/supabase/types';
 
-interface Notification {
-  id: string;
-  user_id: string;
-  title: string;
-  message: string;
-  type: 'booking' | 'referral' | 'earning' | 'system';
-  is_read: boolean;
-  metadata?: any;
-  created_at: string;
-}
+type Notification = Database['public']['Tables']['notifications']['Row'];
 
 export const useNotifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);

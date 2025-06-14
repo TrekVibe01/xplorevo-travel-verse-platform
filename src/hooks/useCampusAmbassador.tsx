@@ -3,20 +3,9 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from './useAuth';
 import { useToast } from '@/hooks/use-toast';
+import type { Database } from '@/integrations/supabase/types';
 
-interface CampusAmbassador {
-  id: string;
-  user_id: string;
-  college_name: string;
-  verification_status: 'pending' | 'approved' | 'rejected';
-  total_referrals: number;
-  total_earnings: number;
-  monthly_referrals: number;
-  monthly_earnings: number;
-  rank?: number;
-  performance_score: number;
-  created_at: string;
-}
+type CampusAmbassador = Database['public']['Tables']['campus_ambassadors']['Row'];
 
 export const useCampusAmbassador = () => {
   const [ambassador, setAmbassador] = useState<CampusAmbassador | null>(null);
