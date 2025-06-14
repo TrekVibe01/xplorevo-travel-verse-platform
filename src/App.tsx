@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LoadingScreen from "./components/LoadingScreen";
+import AnimatedLoginExperience from "./components/AnimatedLoginExperience";
 import Index from "./pages/Index";
 import Tours from "./pages/Tours";
 import TourOperatorProfile from "./pages/TourOperatorProfile";
@@ -22,26 +23,60 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [userCredentials, setUserCredentials] = useState(null);
 
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000); // Reduced loading time
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLogin = (credentials: any) => {
+    console.log('=== App.tsx handleLogin called ===');
+    console.log('Received credentials:', credentials);
+    
+    setUserCredentials(credentials);
+    setIsLoggedIn(true);
+    setShowLogin(false);
+    
+    console.log('Login state updated - isLoggedIn:', true);
+    console.log('=== Login process complete ===');
+  };
+
+  const handleShowLogin = () => {
+    console.log('Showing login screen');
+    setShowLogin(true);
+  };
 
   const handleLoadingComplete = () => {
     console.log('Loading completed');
     setIsLoading(false);
   };
 
+  const handleLogout = () => {
+    console.log('Logging out user');
+    setIsLoggedIn(false);
+    setUserCredentials(null);
+    setShowLogin(false);
+  };
+
   console.log('=== App.tsx Render ===');
   console.log('isLoading:', isLoading);
+  console.log('isLoggedIn:', isLoggedIn);
+  console.log('showLogin:', showLogin);
+  console.log('userCredentials:', userCredentials);
 
   if (isLoading) {
     return <LoadingScreen onLoadingComplete={handleLoadingComplete} />;
+  }
+
+  if (showLogin && !isLoggedIn) {
+    return <AnimatedLoginExperience onLogin={handleLogin} />;
   }
 
   return (
@@ -51,7 +86,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Index onGetStarted={handleShowLogin} />} />
             <Route path="/tours" element={<Tours />} />
             <Route path="/tour-operator-profile" element={<TourOperatorProfile />} />
             <Route path="/campus-ambassador" element={<CampusAmbassadorRegistration />} />
