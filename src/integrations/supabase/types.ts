@@ -9,7 +9,476 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          ambassador_id: string | null
+          booking_date: string | null
+          commission_amount: number | null
+          created_at: string | null
+          id: string
+          package_id: string | null
+          participants: number
+          special_requests: string | null
+          status: string | null
+          total_amount: number
+          travel_date: string
+          user_id: string | null
+        }
+        Insert: {
+          ambassador_id?: string | null
+          booking_date?: string | null
+          commission_amount?: number | null
+          created_at?: string | null
+          id?: string
+          package_id?: string | null
+          participants: number
+          special_requests?: string | null
+          status?: string | null
+          total_amount: number
+          travel_date: string
+          user_id?: string | null
+        }
+        Update: {
+          ambassador_id?: string | null
+          booking_date?: string | null
+          commission_amount?: number | null
+          created_at?: string | null
+          id?: string
+          package_id?: string | null
+          participants?: number
+          special_requests?: string | null
+          status?: string | null
+          total_amount?: number
+          travel_date?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bookings_ambassador_id_fkey"
+            columns: ["ambassador_id"]
+            isOneToOne: false
+            referencedRelation: "campus_ambassadors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_package_id_fkey"
+            columns: ["package_id"]
+            isOneToOne: false
+            referencedRelation: "tour_packages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campus_ambassadors: {
+        Row: {
+          college_name: string
+          created_at: string | null
+          id: string
+          monthly_earnings: number | null
+          monthly_referrals: number | null
+          performance_score: number | null
+          rank: number | null
+          total_earnings: number | null
+          total_referrals: number | null
+          user_id: string | null
+          verification_status: string | null
+        }
+        Insert: {
+          college_name: string
+          created_at?: string | null
+          id?: string
+          monthly_earnings?: number | null
+          monthly_referrals?: number | null
+          performance_score?: number | null
+          rank?: number | null
+          total_earnings?: number | null
+          total_referrals?: number | null
+          user_id?: string | null
+          verification_status?: string | null
+        }
+        Update: {
+          college_name?: string
+          created_at?: string | null
+          id?: string
+          monthly_earnings?: number | null
+          monthly_referrals?: number | null
+          performance_score?: number | null
+          rank?: number | null
+          total_earnings?: number | null
+          total_referrals?: number | null
+          user_id?: string | null
+          verification_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campus_ambassadors_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          metadata: Json | null
+          title: string
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          metadata?: Json | null
+          title: string
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          metadata?: Json | null
+          title?: string
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          college_name: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string | null
+          user_type: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          college_name?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+          user_type: string
+        }
+        Update: {
+          avatar_url?: string | null
+          college_name?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+          user_type?: string
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          ambassador_id: string | null
+          created_at: string | null
+          id: string
+          referral_code: string
+          referred_user_id: string | null
+          reward_amount: number | null
+          status: string | null
+        }
+        Insert: {
+          ambassador_id?: string | null
+          created_at?: string | null
+          id?: string
+          referral_code: string
+          referred_user_id?: string | null
+          reward_amount?: number | null
+          status?: string | null
+        }
+        Update: {
+          ambassador_id?: string | null
+          created_at?: string | null
+          id?: string
+          referral_code?: string
+          referred_user_id?: string | null
+          reward_amount?: number | null
+          status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referrals_ambassador_id_fkey"
+            columns: ["ambassador_id"]
+            isOneToOne: false
+            referencedRelation: "campus_ambassadors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_referred_user_id_fkey"
+            columns: ["referred_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rental_bookings: {
+        Row: {
+          created_at: string | null
+          dropoff_location: string | null
+          end_date: string
+          id: string
+          pickup_location: string | null
+          start_date: string
+          status: string | null
+          total_amount: number
+          user_id: string | null
+          vehicle_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          dropoff_location?: string | null
+          end_date: string
+          id?: string
+          pickup_location?: string | null
+          start_date: string
+          status?: string | null
+          total_amount: number
+          user_id?: string | null
+          vehicle_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          dropoff_location?: string | null
+          end_date?: string
+          id?: string
+          pickup_location?: string | null
+          start_date?: string
+          status?: string | null
+          total_amount?: number
+          user_id?: string | null
+          vehicle_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rental_bookings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rental_bookings_vehicle_id_fkey"
+            columns: ["vehicle_id"]
+            isOneToOne: false
+            referencedRelation: "rental_vehicles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rental_vehicles: {
+        Row: {
+          brand: string
+          created_at: string | null
+          features: string[] | null
+          id: string
+          images: string[] | null
+          is_available: boolean | null
+          location: string
+          model: string
+          owner_id: string | null
+          price_per_day: number
+          rating: number | null
+          total_reviews: number | null
+          vehicle_type: string
+          year: number | null
+        }
+        Insert: {
+          brand: string
+          created_at?: string | null
+          features?: string[] | null
+          id?: string
+          images?: string[] | null
+          is_available?: boolean | null
+          location: string
+          model: string
+          owner_id?: string | null
+          price_per_day: number
+          rating?: number | null
+          total_reviews?: number | null
+          vehicle_type: string
+          year?: number | null
+        }
+        Update: {
+          brand?: string
+          created_at?: string | null
+          features?: string[] | null
+          id?: string
+          images?: string[] | null
+          is_available?: boolean | null
+          location?: string
+          model?: string
+          owner_id?: string | null
+          price_per_day?: number
+          rating?: number | null
+          total_reviews?: number | null
+          vehicle_type?: string
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rental_vehicles_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tour_packages: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          destination: string
+          difficulty_level: string | null
+          duration_days: number
+          exclusions: string[] | null
+          id: string
+          images: string[] | null
+          inclusions: string[] | null
+          is_active: boolean | null
+          max_participants: number | null
+          operator_id: string | null
+          price: number
+          rating: number | null
+          title: string
+          total_reviews: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          destination: string
+          difficulty_level?: string | null
+          duration_days: number
+          exclusions?: string[] | null
+          id?: string
+          images?: string[] | null
+          inclusions?: string[] | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          operator_id?: string | null
+          price: number
+          rating?: number | null
+          title: string
+          total_reviews?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          destination?: string
+          difficulty_level?: string | null
+          duration_days?: number
+          exclusions?: string[] | null
+          id?: string
+          images?: string[] | null
+          inclusions?: string[] | null
+          is_active?: boolean | null
+          max_participants?: number | null
+          operator_id?: string | null
+          price?: number
+          rating?: number | null
+          title?: string
+          total_reviews?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tour_packages_operator_id_fkey"
+            columns: ["operator_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      travel_reels: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          is_featured: boolean | null
+          likes_count: number | null
+          location: string | null
+          tags: string[] | null
+          thumbnail_url: string | null
+          title: string
+          user_id: string | null
+          video_url: string
+          views_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_featured?: boolean | null
+          likes_count?: number | null
+          location?: string | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title: string
+          user_id?: string | null
+          video_url: string
+          views_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          is_featured?: boolean | null
+          likes_count?: number | null
+          location?: string | null
+          tags?: string[] | null
+          thumbnail_url?: string | null
+          title?: string
+          user_id?: string | null
+          video_url?: string
+          views_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "travel_reels_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
