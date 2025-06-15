@@ -1,108 +1,98 @@
 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { 
+  User, 
+  Mail, 
+  Lock, 
+  Phone, 
+  Eye, 
+  EyeOff,
+  Building
+} from "lucide-react";
 
 interface AuthFormFieldsProps {
   isLogin: boolean;
-  email: string;
-  setEmail: (email: string) => void;
-  password: string;
-  setPassword: (password: string) => void;
-  fullName: string;
-  setFullName: (fullName: string) => void;
-  phone: string;
-  setPhone: (phone: string) => void;
-  collegeName: string;
-  setCollegeName: (collegeName: string) => void;
   userType: string;
 }
 
-const AuthFormFields = ({
-  isLogin,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  fullName,
-  setFullName,
-  phone,
-  setPhone,
-  collegeName,
-  setCollegeName,
-  userType,
-}: AuthFormFieldsProps) => {
+const AuthFormFields = ({ isLogin, userType }: AuthFormFieldsProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-    <>
-      <div className="space-y-2 animate-fade-in delay-400">
-        <Label htmlFor="email" className="text-gray-700 font-medium">Email</Label>
+    <div className="space-y-4 animate-fade-in delay-200">
+      {!isLogin && (
+        <div className="relative group">
+          <User className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-red-500 transition-colors" />
+          <Input
+            type="text"
+            placeholder="Full Name"
+            className="pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
+          />
+        </div>
+      )}
+      
+      <div className="relative group">
+        <Mail className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-red-500 transition-colors" />
         <Input
-          id="email"
           type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
+          placeholder="Email Address"
+          className="pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
         />
       </div>
 
-      <div className="space-y-2 animate-fade-in delay-500">
-        <Label htmlFor="password" className="text-gray-700 font-medium">Password</Label>
+      {!isLogin && userType === "ambassador" && (
+        <div className="relative group">
+          <Building className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-purple-500 transition-colors" />
+          <Input
+            type="text"
+            placeholder="College/University Name"
+            className="pl-10 h-12 border-gray-200 focus:border-purple-500 focus:ring-purple-500"
+          />
+        </div>
+      )}
+
+      {!isLogin && (
+        <div className="relative group">
+          <Phone className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-red-500 transition-colors" />
+          <Input
+            type="tel"
+            placeholder="Phone Number"
+            className="pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
+          />
+        </div>
+      )}
+
+      <div className="relative group">
+        <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-red-500 transition-colors" />
         <Input
-          id="password"
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          className="pl-10 pr-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
         />
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          className="absolute right-1 top-1 h-10 w-10 hover:bg-gray-100"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+        </Button>
       </div>
 
       {!isLogin && (
-        <>
-          <div className="space-y-2 animate-fade-in delay-600">
-            <Label htmlFor="fullName" className="text-gray-700 font-medium">Full Name</Label>
-            <Input
-              id="fullName"
-              type="text"
-              placeholder="Enter your full name"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-              className="h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
-            />
-          </div>
-
-          <div className="space-y-2 animate-fade-in delay-700">
-            <Label htmlFor="phone" className="text-gray-700 font-medium">Phone Number</Label>
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="Enter your phone number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
-            />
-          </div>
-
-          {userType === "ambassador" && (
-            <div className="space-y-2 animate-fade-in delay-800">
-              <Label htmlFor="collegeName" className="text-gray-700 font-medium">College Name</Label>
-              <Input
-                id="collegeName"
-                type="text"
-                placeholder="Enter your college name"
-                value={collegeName}
-                onChange={(e) => setCollegeName(e.target.value)}
-                required
-                className="h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
-              />
-            </div>
-          )}
-        </>
+        <div className="relative group">
+          <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400 group-focus-within:text-red-500 transition-colors" />
+          <Input
+            type="password"
+            placeholder="Confirm Password"
+            className="pl-10 h-12 border-gray-200 focus:border-red-500 focus:ring-red-500"
+          />
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
