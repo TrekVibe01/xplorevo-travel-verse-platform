@@ -6,6 +6,7 @@ import Features from "@/components/Features";
 import TravelReels from "@/components/TravelReels";
 import CampusAmbassador from "@/components/CampusAmbassador";
 import Footer from "@/components/Footer";
+import AddToHomeScreen from "@/components/AddToHomeScreen";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <TravelReels />
       <CampusAmbassador />
       <Footer />
+      <AddToHomeScreen />
     </div>
   );
 };
