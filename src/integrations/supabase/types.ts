@@ -126,6 +126,89 @@ export type Database = {
           },
         ]
       }
+      community_group_posts: {
+        Row: {
+          content: string
+          created_at: string | null
+          group_id: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_group_posts_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "community_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "community_group_posts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      community_groups: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          id: string
+          image: string | null
+          is_verified: boolean | null
+          location: string | null
+          name: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          image?: string | null
+          is_verified?: boolean | null
+          location?: string | null
+          name: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          image?: string | null
+          is_verified?: boolean | null
+          location?: string | null
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_groups_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string | null
