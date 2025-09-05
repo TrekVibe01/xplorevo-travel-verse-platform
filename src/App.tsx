@@ -56,6 +56,9 @@ const App = () => {
             <Route path="/tour-operator-profile" element={<TourOperatorProfile />} />
             <Route path="/campus-ambassador" element={<CampusAmbassadorRegistration />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/user-dashboard" element={<Dashboard />} />
+            <Route path="/org-dashboard" element={<Dashboard />} />
+            <Route path="/admin-dashboard" element={<Dashboard />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/community" element={<Community />} />
             <Route path="/rentals" element={<Rentals />} />
