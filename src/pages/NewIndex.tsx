@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { ToursSection } from "@/components/home/ToursSection";
 import { AdventureGuardianSection } from "@/components/home/AdventureGuardianSection";
 import { CommunityPreview } from "@/components/home/CommunityPreview";
+import { TravelReelsSection } from "@/components/home/TravelReelsSection";
 
 export default function NewIndex() {
   return (
@@ -11,6 +12,7 @@ export default function NewIndex() {
       <Navigation />
       <HeroSection />
       <ToursSection />
+      <TravelReelsSection />
       <AdventureGuardianSection />
       <CommunityPreview />
       <Footer />
