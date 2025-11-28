@@ -1,73 +1,149 @@
-# Welcome to your Lovable project
+A friendly, human‑readable overview of the entire Xplorevo platform — what it is, how it works, the tech behind it, and how everything fits together.
 
-## Project info
 
-**URL**: https://lovable.dev/projects/11cf37cb-d8dc-4cb0-97e7-47604db7334b
+🚀 What is Xplorevo?
 
-## How can I edit this code?
+Xplorevo is a digital travel ecosystem designed to make exploring India simple, safe, and exciting. It connects:
 
-There are several ways of editing your application.
+* Travelers looking for authentic experiences
+* Verified tour operators
+* Vehicle rental partners
+* Student communities
+* Creators sharing reels
+* Admins keeping everything safe and smooth
 
-**Use Lovable**
+Think of it as **India’s travel super‑app** — tours, reels, rentals, community, AI tools, all in one place.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/11cf37cb-d8dc-4cb0-97e7-47604db7334b) and start prompting.
+🧩 How the Platform Is Built
 
-Changes made via Lovable will be committed automatically to this repo.
+We use a clean, modern, scalable setup designed for fast updates and safe user experiences.
 
-**Use your preferred IDE**
+Frontend (What users see)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+* React / Next.js
+* TailwindCSS for styling
+* Framer Motion for smooth animations
+* ShadCN UI components
+* React Query / SWR for data
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Backend (What powers the system)
 
-Follow these steps:
+* Node.js + Express or Next.js API
+* PostgreSQL database
+* Prisma for database models
+* JWT authentication
+* Email + optional SMS alerts
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Storage & Media
+AWS S3 / Cloudflare R2 for images and reels
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+AI Tools Integrated
 
-# Step 3: Install the necessary dependencies.
-npm i
+Gemini API** for Smart Travel Planning (AI itineraries)
+Adventure Guardian AI** (external safety system)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+🔑 Environment Variables (Simple Version)
 
-**Edit a file directly in GitHub**
+Developers must set these before running the project:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
+DATABASE_URL=
+JWT_SECRET=
+S3_ACCESS_KEY=
+S3_SECRET_KEY=
+GEMINI_API_KEY=
+GOOGLE_API_KEY=
+SMTP_HOST=
+SMTP_USER=
+ADVENTURE_GUARDIAN_URL=
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-## What technologies are used for this project?
 
-This project is built with:
+📦 Key Features
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Tours & Treks
 
-## How can I deploy this project?
+* Explore curated treks and trips
+* Book instantly
+* See what’s included
 
-Simply open [Lovable](https://lovable.dev/projects/11cf37cb-d8dc-4cb0-97e7-47604db7334b) and click on Share -> Publish.
+Travel Reels
 
-## Can I connect a custom domain to my Lovable project?
+* Watch portrait-style reels (like Instagram)
+* Upload your own reels
 
-Yes, you can!
+Rentals
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+* Rent bikes, scooties, or cars
+* Hourly/daily pricing
+* Home delivery toggle
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Community
+
+* Join groups
+* Attend events
+* Post on forums in Marathi / Hindi / English
+
+Smart Planning (AI)
+
+ AI builds your full travel plan based on budget + days
+
+Safety & Solo Travel Support
+
+* Women‑only groups
+* SOS with live location
+* Verified accommodations
+
+Adventure Guardian AI
+
+* Checks trek safety, health risk, and fraud
+* Redirects to official tool
+
+Admin Dashboard
+
+* Manage tours, reels, rentals, users, alerts
+* View analytics and performance
+
+ 🧪 Testing & Quality
+
+We aim to keep the platform reliable:
+
+* Automated tests (API + UI)
+* Lighthouse performance checks
+* Media optimization
+* Error and crash monitoring
+
+---
+
+ 🚀 Deployment
+
+* Frontend on Vercel / Netlify
+* Backend on Railway / Render
+* Database on PostgreSQL
+* S3 bucket for media uploads
+
+ 📂 Project Structure (Simple)
+
+---
+xplorevo/
+  frontend/
+  backend/
+  docs/
+---
+
+---
+
+🌱 Roadmap (Short Version)
+
+* Mobile App (iOS/Android)
+* VR-based trek previews
+* AI-based safety scoring
+* College travel ecosystem expansion
+
+---
+
+📞 Support
+
+[connect@xplorevo.com](mailto:connect@xplorevo.com) | +91 9763262025 | Pune
+
+© 2025 Xplorevo Pvt Ltd. All rights reserved.
