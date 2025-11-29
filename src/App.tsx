@@ -12,6 +12,7 @@ import Tours from "./pages/Tours";
 import Community from "./pages/Community";
 import Rentals from "./pages/Rentals";
 import TravelReels from "./pages/TravelReels";
+import SmartPlanning from "./pages/SmartPlanning";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => {
             <Route path="/community" element={<Community />} />
             <Route path="/rentals" element={<Rentals />} />
             <Route path="/reels" element={<TravelReels />} />
+            <Route path="/smart-planning" element={<SmartPlanning />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

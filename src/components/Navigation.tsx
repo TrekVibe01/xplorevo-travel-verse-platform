@@ -25,9 +25,9 @@ const Navigation = () => {
   const navItems = [
     { label: "Tours", path: "/tours", icon: MapPin },
     { label: "Community", path: "/community", icon: Users },
-    { label: "Travel Reels", path: "/reels", icon: Calendar },
+    { label: "Reels", path: "/reels", icon: Calendar },
     { label: "Rentals", path: "/rentals", icon: Car },
-    { label: "Dashboard", path: "/dashboard", icon: Shield },
+    { label: "Smart Planning", path: "/smart-planning", icon: Shield },
   ];
 
   return (
