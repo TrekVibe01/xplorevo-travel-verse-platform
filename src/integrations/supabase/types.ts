@@ -88,6 +88,101 @@ export type Database = {
         }
         Relationships: []
       }
+      community_messages: {
+        Row: {
+          created_at: string | null
+          group_id: string | null
+          id: string
+          message: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          message: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          group_id?: string | null
+          id?: string
+          message?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_messages_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "community_groups"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      emergency_alerts: {
+        Row: {
+          acknowledged_at: string | null
+          acknowledged_by: string | null
+          created_at: string | null
+          id: string
+          latitude: number
+          longitude: number
+          notes: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          acknowledged_at?: string | null
+          acknowledged_by?: string | null
+          created_at?: string | null
+          id?: string
+          latitude: number
+          longitude: number
+          notes?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          acknowledged_at?: string | null
+          acknowledged_by?: string | null
+          created_at?: string | null
+          id?: string
+          latitude?: number
+          longitude?: number
+          notes?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      forum_replies: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          language: string | null
+          post_id: string
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          post_id: string
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          post_id?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       organisations: {
         Row: {
           about: string | null
@@ -328,6 +423,36 @@ export type Database = {
           updated_at?: string
           vehicle_type?: string
           year?: number | null
+        }
+        Relationships: []
+      }
+      saved_itineraries: {
+        Row: {
+          budget: number | null
+          created_at: string | null
+          days: number
+          destination: string
+          id: string
+          itinerary_data: Json
+          user_id: string | null
+        }
+        Insert: {
+          budget?: number | null
+          created_at?: string | null
+          days: number
+          destination: string
+          id?: string
+          itinerary_data: Json
+          user_id?: string | null
+        }
+        Update: {
+          budget?: number | null
+          created_at?: string | null
+          days?: number
+          destination?: string
+          id?: string
+          itinerary_data?: Json
+          user_id?: string | null
         }
         Relationships: []
       }
