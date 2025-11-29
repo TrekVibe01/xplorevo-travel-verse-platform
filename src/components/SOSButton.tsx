@@ -3,30 +3,69 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertTriangle, Phone, MapPin, Clock } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const SOSButton = () => {
+  const { toast } = useToast();
   const [isSOSActive, setIsSOSActive] = useState(false);
   const [location, setLocation] = useState("Fetching location...");
+  const [sending, setSending] = useState(false);
 
-  const handleSOSClick = () => {
+  const handleSOSClick = async () => {
     setIsSOSActive(true);
+    setSending(true);
+    
     // Get user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           setLocation(`${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+          
+          // Send emergency alert to backend
+          const { data: { user } } = await supabase.auth.getUser();
+          
+          try {
+            const { error } = await supabase.functions.invoke('emergency-alert', {
+              body: {
+                user_id: user?.id || 'anonymous',
+                latitude,
+                longitude
+              }
+            });
+
+            if (error) throw error;
+            
+            toast({ 
+              title: "SOS Alert Sent!", 
+              description: "Emergency alert sent to Xplorevo Team. Help is on the way." 
+            });
+          } catch (error) {
+            console.error("SOS Error:", error);
+            toast({ 
+              title: "Alert sent locally", 
+              description: "Location recorded. Contact: 9763262025",
+              variant: "destructive" 
+            });
+          } finally {
+            setSending(false);
+          }
         },
         () => {
           setLocation("Location unavailable");
+          setSending(false);
+          toast({ 
+            title: "Location unavailable", 
+            description: "Please enable location services" 
+          });
         }
       );
     }
-    
-    // Simulate emergency alert
-    setTimeout(() => {
-      setIsSOSActive(false);
-    }, 10000);
+  };
+
+  const handleCallEmergency = () => {
+    window.location.href = "tel:9763262025";
   };
 
   if (isSOSActive) {
@@ -54,16 +93,17 @@ const SOSButton = () => {
               </div>
             </div>
             <div className="space-y-2">
-              <Button className="w-full bg-red-500 hover:bg-red-600">
+              <Button onClick={handleCallEmergency} className="w-full bg-red-500 hover:bg-red-600">
                 <Phone className="w-4 h-4 mr-2" />
-                Call Emergency Services
+                Call Emergency: 9763262025
               </Button>
               <Button 
                 variant="outline" 
                 className="w-full"
                 onClick={() => setIsSOSActive(false)}
+                disabled={sending}
               >
-                Cancel Alert
+                {sending ? "Sending..." : "Close"}
               </Button>
             </div>
           </CardContent>
